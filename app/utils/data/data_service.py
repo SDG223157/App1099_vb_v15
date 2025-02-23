@@ -403,14 +403,14 @@ class DataService:
                         }
                         
                         # Operating Cash Flow
-                        if 'Operating Cash Flow' in cash_flow.index:
+                        if 'Operating Income' in income_stmt.index:
                             try:
-                                cf = float(cash_flow.loc['Operating Cash Flow', date] or 0)
-                                year_data['cf_cash_from_oper'] = cf
+                                cf = float(cash_flow.loc['Operating Income', date] or 0)
+                                year_data['is_oper_income'] = cf
                                 # logger.info(f"Got Operating Cash Flow for {ticker} at {date}: {cf}")
                             except Exception as e:
                                 # logger.error(f"Error getting Operating Cash Flow for {ticker} at {date}: {str(e)}")
-                                year_data['cf_cash_from_oper'] = 0
+                                year_data['is_oper_income'] = 0
                                 
                         # Capital Expenditures
                         if 'Capital Expenditure' in cash_flow.index:
@@ -473,7 +473,7 @@ class DataService:
                     'period_label',
                     'period_end_date',
                     'is_sales_and_services_revenues',
-                    'cf_cash_from_oper',
+                    'is_oper_income',
                     'is_net_income',
                     'eps',
                     'oper_margin',
